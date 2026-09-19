@@ -1,7 +1,9 @@
 using BepInEx;
 using BepInEx.Logging;
+using HarmonyLib;
 using Jotunn.Utils;
 using PullMats.Game;
+using PullMats.UI;
 
 namespace PullMats
 {
@@ -23,6 +25,7 @@ namespace PullMats
             PullMatsConfig.Bind(Config);
             PullInput.Register();
             PullController.Init();
+            new Harmony(Guid).PatchAll(typeof(KeyHintRow));
             Log.LogInfo($"{Name} {Version} loaded");
         }
 
