@@ -1,6 +1,7 @@
 using BepInEx;
 using BepInEx.Logging;
 using Jotunn.Utils;
+using PullMats.Game;
 
 namespace PullMats
 {
@@ -21,7 +22,7 @@ namespace PullMats
             Log = Logger;
             PullMatsConfig.Bind(Config);
             PullInput.Register();
-            PullInput.PullRequested += (_, piece) => Log.LogInfo($"Pull requested: {piece.m_name}");
+            PullController.Init();
             Log.LogInfo($"{Name} {Version} loaded");
         }
 
