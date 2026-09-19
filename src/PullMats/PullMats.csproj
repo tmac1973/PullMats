@@ -9,6 +9,9 @@
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <OutputPath>bin/$(Configuration)/</OutputPath>
+    <!-- Keep in sync with package/manifest.json and Plugin.Version; the Package target checks all three. -->
+    <Version>0.9.0</Version>
+    <RepoRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)../../'))</RepoRoot>
   </PropertyGroup>
 
   <ItemGroup>
@@ -43,6 +46,26 @@
     </ItemGroup>
     <Copy SourceFiles="@(DeployFiles)" DestinationFolder="$(PluginsDir)/Spronglehump-PullMats" SkipUnchangedFiles="true" />
     <Message Importance="high" Text="PullMats deployed to $(PluginsDir)/Spronglehump-PullMats" />
+  </Target>
+
+  <!-- Thunderstore/Hexium zip: dotnet build -c Release -t:Package -->
+  <Target Name="Package" DependsOnTargets="Build">
+    <PropertyGroup>
+      <ManifestVersion>$([System.Text.RegularExpressions.Regex]::Match($([System.IO.File]::ReadAllText('$(RepoRoot)package/manifest.json')), '"version_number"\s*:\s*"([^"]+)"').Groups[1].Value)</ManifestVersion>
+      <PluginVersion>$([System.Text.RegularExpressions.Regex]::Match($([System.IO.File]::ReadAllText('$(MSBuildThisFileDirectory)Plugin.cs')), 'Version\s*=\s*"([^"]+)"').Groups[1].Value)</PluginVersion>
+      <PackageStage>$(MSBuildThisFileDirectory)obj/package/</PackageStage>
+      <PackageZip>$(RepoRoot)dist/Spronglehump-PullMats-$(Version).zip</PackageZip>
+    </PropertyGroup>
+    <Error Condition="'$(ManifestVersion)' != '$(Version)' Or '$(PluginVersion)' != '$(Version)'"
+           Text="Version mismatch: csproj $(Version), manifest.json $(ManifestVersion), Plugin.Version $(PluginVersion)" />
+
+    <RemoveDir Directories="$(PackageStage)" />
+    <Copy SourceFiles="$(RepoRoot)package/manifest.json;$(RepoRoot)package/icon.png;$(RepoRoot)README.md;$(RepoRoot)CHANGELOG.md"
+          DestinationFolder="$(PackageStage)" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(PackageStage)plugins" />
+    <MakeDir Directories="$(RepoRoot)dist" />
+    <ZipDirectory SourceDirectory="$(PackageStage)" DestinationFile="$(PackageZip)" Overwrite="true" />
+    <Message Importance="high" Text="Packaged $(PackageZip)" />
   </Target>
 
 </Project>

@@ -1,0 +1,11 @@
+{
+  "name": "PullMats",
+  "version_number": "0.9.0",
+  "website_url": "https://github.com/tmac1973/PullMats",
+  "description": "Hammer out, piece selected, press N: pulls one full set of that piece's materials from nearby chests (via AzuCraftyBoxes). All-or-nothing, never over-encumbers.",
+  "dependencies": [
+    "denikson-BepInExPack_Valheim-5.4.2350",
+    "ValheimModding-Jotunn-2.30.1",
+    "Azumatt-AzuCraftyBoxes-1.8.22"
+  ]
+}
