@@ -19,7 +19,15 @@ namespace PullMats
         private void Awake()
         {
             Log = Logger;
+            PullMatsConfig.Bind(Config);
+            PullInput.Register();
+            PullInput.PullRequested += (_, piece) => Log.LogInfo($"Pull requested: {piece.m_name}");
             Log.LogInfo($"{Name} {Version} loaded");
+        }
+
+        private void Update()
+        {
+            PullInput.Tick();
         }
     }
 }

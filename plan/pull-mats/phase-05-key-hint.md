@@ -32,7 +32,7 @@ hint rows change.
    2. Set the keyboard key label to `PullMatsConfig.PullKey.Value.ToString()`,
       but only when it has changed, compared against a cached string.
    3. Hide the gamepad row when `PullMatsConfig.PullGamepad.Value == GamepadButton.None`.
-      Otherwise label it with `ZInput.instance.GetBoundKeyString("PullMats_Pull", true)`.
+      Otherwise label it with `ZInput.instance.GetBoundKeyString("Joy!" + PullInput.ButtonName, true)` (Jotunn registers the gamepad binding under `Joy!<name>`, and `PullInput.ButtonName` is the name after Jotunn appended `!<mod guid>`).
 5. If any lookup in step 1 returns null (a Valheim UI change), log one warning
    and skip creating the hint. The pull feature itself keeps working.
 

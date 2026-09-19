@@ -47,7 +47,7 @@ in any other state does nothing.
    - `PullMatsConfig.Enabled`
    - `Player.m_localPlayer != null` (this is what keeps it inert on a dedicated
      server, which has no local player)
-   - `ZInput.GetButtonDown("PullMats_Pull")` (Jotunn registers both the
+   - `ZInput.GetButtonDown(PullInput.ButtonName)`, which is the `ButtonConfig.Name` read back after `AddButton`, because Jotunn appends `!<mod guid>` to it (Jotunn registers both the
      shortcut and the gamepad button under this name)
    - no text input or menu has focus: `!Console.IsVisible()`, `!Chat.instance ||
      !Chat.instance.HasFocus()`, `!TextInput.IsVisible()`, `!Menu.IsVisible()`,
