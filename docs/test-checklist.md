@@ -43,3 +43,11 @@ If a row fails: fix it, rerun that row in every listed mode, then rerun MP-1 and
 
 | Date | Build (commit) | Row | Mode | Result | Notes |
 |---|---|---|---|---|---|
+| 2026-09-19 | bc16749 | MP-1 | D | pass | 2 Portal sets moved (log: 2× each material add); relog consistent |
+| 2026-09-19 | bc16749 | MP-2 | D | pass | Pull survived server stop (World save 5/5) + restart |
+| 2026-09-19 | bc16749 | MP-9 | D | pass | Mashing: 10 accepted presses = 10× Wood x10; stopped at weight limit. Holding N = one press |
+| 2026-09-19 | bc16749 | MP-6a | D | pass | Server TopUp + Hammer,Hoe synced to admin client (editable); TopUp pulled 6 with 4 carried; hoe triggers |
+| 2026-09-19 | bc16749 | MP-6b | D | pass | Non-admin: synced values shown locked and applied; local FullSet/Hammer restored after disconnect |
+| 2026-09-19 | bc16749 | MP-5 | D | pass | Server without PullMats: join ok, pull works, local config editable |
+| 2026-09-19 | bc16749 | MP-7 | D | pass | Client without PullMats joined server with it; no compat errors (only vanilla PlayFab NRE) |
+| 2026-09-19 | bc16749 | MP-8 | D | pass | Server 0.1.1, client 0.1.0: join ok, pull works |
